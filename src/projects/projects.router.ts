@@ -4,14 +4,12 @@ import { ProjectsController } from './projects.controller'
 
 export const projectRouter = express.Router()
 
-projectRouter.get('/', (req, res) => {
-  ProjectsController.getAllProjects(req, res).catch(
-    (err) => { console.log(err) }
-  )
+projectRouter.get('/', async (req, res) => {
+  await ProjectsController.getAllProjects(req, res)
 })
 
-projectRouter.post('/add', (req, res) => {
-  ProjectsController.createProject(req, res).catch(
-    (err) => { console.log(err) }
-  )
+projectRouter.post('/add', async (req, res) => {
+  const newProject = await ProjectsController.createProject(req, res)
+
+  return newProject
 })

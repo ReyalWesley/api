@@ -1,4 +1,4 @@
-export interface ProjectType {
+export interface Project {
   technos: AllowedBadgeLabel[]
   title: string
   description: string[]

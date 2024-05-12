@@ -1,7 +1,5 @@
-import { ProjectType, AllowedBadgeLabel } from '../projects/project';
+import { AllowedBadgeLabel } from '../projects/project';
 import { database } from '../services/db';
-
-export const projectsCollection = database.collection<ProjectType>('Projects');
 
 const allowedBadgeLabels: AllowedBadgeLabel[] = [
   'api platform',
@@ -16,7 +14,7 @@ const allowedBadgeLabels: AllowedBadgeLabel[] = [
 ];
 
 export class ProjectSchema {
-  private static schema = {
+  public static schema = {
     $jsonSchema: {
       bsonType: 'object',
       required: ['technos', 'title', 'description', 'img', 'link', 'gitLink'],
@@ -55,15 +53,17 @@ export class ProjectSchema {
   };
 
   static async applyToCollection(): Promise<void> {
-        await database.command({
-            collMod: 'project',
-            validator: ProjectSchema.schema
-        }); 
-    }
+    await database.command({
+      collMod: 'Projects',
+      validator: ProjectSchema.schema
+    }); 
+  }
 
-    static async dumpFromCollection(): Promise<void> {
-        const options = await projectsCollection.options();
-        console.log('projectSchema :');
-        console.dir(options.validator, { depth: null });
-    }
+  // static async dumpFromCollection(): Promise<void> {
+  //     const options = await projectsCollection.options();
+  //     console.log('projectSchema :');
+  //     console.dir(options.validator, { depth: null });
+  // }
 }
+
+export const projectsCollection = database.collection('Projects')

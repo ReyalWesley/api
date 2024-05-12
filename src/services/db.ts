@@ -1,5 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 import dotenv from "dotenv";
+import { ProjectSchema } from "../projects/project.collection";
+// import { Project } from "../projects/project";
 
 dotenv.config();
 
@@ -22,6 +24,9 @@ export async function rundb() {
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("Portfolio").command({ ping: 1 });
+
+    await database.command({ collMod: 'Projects', validator: ProjectSchema.schema })
+
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } catch (error) {
     console.error("An error occurred while connecting to MongoDB:", error);

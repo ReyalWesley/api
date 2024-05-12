@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # Exposez le port sur lequel votre application s'exécute
-EXPOSE 3000
+EXPOSE 3001
 
 # Démarrez l'application
 CMD [ "node", "dist/src/index.js" ]
