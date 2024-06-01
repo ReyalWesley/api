@@ -11,6 +11,7 @@ const allowedBadgeLabels: AllowedBadgeLabel[] = [
   'symfony',
   'tailwind',
   'typescript',
+  'vite',
 ];
 
 export class ProjectSchema {
